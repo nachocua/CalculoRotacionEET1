@@ -1,0 +1,11 @@
+D:\Escritorio\UTN-FRP-TUP-Laboratorio2-TP2\Gestor de rotaciones\Gestor de rotaciones\bin\Debug\Gestor de rotaciones.exe.config
+D:\Escritorio\UTN-FRP-TUP-Laboratorio2-TP2\Gestor de rotaciones\Gestor de rotaciones\bin\Debug\Gestor de rotaciones.exe
+D:\Escritorio\UTN-FRP-TUP-Laboratorio2-TP2\Gestor de rotaciones\Gestor de rotaciones\bin\Debug\Gestor de rotaciones.pdb
+D:\Escritorio\UTN-FRP-TUP-Laboratorio2-TP2\Gestor de rotaciones\Gestor de rotaciones\obj\Debug\Gestor de rotaciones.csproj.AssemblyReference.cache
+D:\Escritorio\UTN-FRP-TUP-Laboratorio2-TP2\Gestor de rotaciones\Gestor de rotaciones\obj\Debug\Gestor_de_rotaciones.Form1.resources
+D:\Escritorio\UTN-FRP-TUP-Laboratorio2-TP2\Gestor de rotaciones\Gestor de rotaciones\obj\Debug\Gestor_de_rotaciones.Properties.Resources.resources
+D:\Escritorio\UTN-FRP-TUP-Laboratorio2-TP2\Gestor de rotaciones\Gestor de rotaciones\obj\Debug\Gestor de rotaciones.csproj.GenerateResource.cache
+D:\Escritorio\UTN-FRP-TUP-Laboratorio2-TP2\Gestor de rotaciones\Gestor de rotaciones\obj\Debug\Gestor de rotaciones.csproj.CoreCompileInputs.cache
+D:\Escritorio\UTN-FRP-TUP-Laboratorio2-TP2\Gestor de rotaciones\Gestor de rotaciones\obj\Debug\Gestor de rotaciones.exe
+D:\Escritorio\UTN-FRP-TUP-Laboratorio2-TP2\Gestor de rotaciones\Gestor de rotaciones\obj\Debug\Gestor de rotaciones.pdb
+D:\Escritorio\UTN-FRP-TUP-Laboratorio2-TP2\Gestor de rotaciones\Gestor de rotaciones\obj\Debug\Gestor_de_rotaciones.Form2.resources
