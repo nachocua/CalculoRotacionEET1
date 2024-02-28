@@ -3,12 +3,12 @@
   "WorkspaceRootPath": "D:\\Escritorio\\CalculoRotacionEET1\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{B299A376-BEE2-40BF-934A-62A6F74B816F}|Gestor de rotaciones\\Gestor de rotaciones.csproj|d:\\escritorio\\calculorotacioneet1\\gestor de rotaciones\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B299A376-BEE2-40BF-934A-62A6F74B816F}|Gestor de rotaciones\\Gestor de rotaciones.csproj|solutionrelative:gestor de rotaciones\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{B299A376-BEE2-40BF-934A-62A6F74B816F}|Gestor de rotaciones\\Gestor de rotaciones.csproj|D:\\Escritorio\\CalculoRotacionEET1\\gestor de rotaciones\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{B299A376-BEE2-40BF-934A-62A6F74B816F}|Gestor de rotaciones\\Gestor de rotaciones.csproj|solutionrelative:gestor de rotaciones\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B299A376-BEE2-40BF-934A-62A6F74B816F}|Gestor de rotaciones\\Gestor de rotaciones.csproj|d:\\escritorio\\calculorotacioneet1\\gestor de rotaciones\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B299A376-BEE2-40BF-934A-62A6F74B816F}|Gestor de rotaciones\\Gestor de rotaciones.csproj|solutionrelative:gestor de rotaciones\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -18,8 +18,21 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 8,
+          "SelectedChildIndex": 0,
           "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Form1.cs [Dise\u00F1o]",
+              "DocumentMoniker": "D:\\Escritorio\\CalculoRotacionEET1\\Gestor de rotaciones\\Form1.cs",
+              "RelativeDocumentMoniker": "Gestor de rotaciones\\Form1.cs",
+              "ToolTip": "D:\\Escritorio\\CalculoRotacionEET1\\Gestor de rotaciones\\Form1.cs [Dise\u00F1o]",
+              "RelativeToolTip": "Gestor de rotaciones\\Form1.cs [Dise\u00F1o]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-02-28T17:45:09.836Z",
+              "IsPinned": true,
+              "EditorCaption": " [Dise\u00F1o]"
+            },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{6d4078d1-5951-4ed1-ac0e-0a8099c1cce5}"
@@ -54,28 +67,16 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "Form1.cs",
               "DocumentMoniker": "D:\\Escritorio\\CalculoRotacionEET1\\Gestor de rotaciones\\Form1.cs",
               "RelativeDocumentMoniker": "Gestor de rotaciones\\Form1.cs",
               "ToolTip": "D:\\Escritorio\\CalculoRotacionEET1\\Gestor de rotaciones\\Form1.cs",
               "RelativeToolTip": "Gestor de rotaciones\\Form1.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABEAAAA5AAAA",
+              "ViewState": "AQIAACEAAAAAAAAAAAAQwDIAAAAOAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-02-28T17:45:09.708Z",
+              "WhenOpened": "2024-02-28T19:33:14.043Z",
               "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Form1.cs [Dise\u00F1o]",
-              "DocumentMoniker": "D:\\Escritorio\\CalculoRotacionEET1\\Gestor de rotaciones\\Form1.cs",
-              "RelativeDocumentMoniker": "Gestor de rotaciones\\Form1.cs",
-              "ToolTip": "D:\\Escritorio\\CalculoRotacionEET1\\Gestor de rotaciones\\Form1.cs [Dise\u00F1o]",
-              "RelativeToolTip": "Gestor de rotaciones\\Form1.cs [Dise\u00F1o]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-02-28T17:45:09.836Z",
-              "EditorCaption": " [Dise\u00F1o]"
             }
           ]
         },

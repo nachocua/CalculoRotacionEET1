@@ -11,20 +11,6 @@ using static System.Windows.Forms.AxHost;
 
 namespace Gestor_de_rotaciones
 {
-    public class FechaConindice
-    {
-        public DateTime Fecha { get; set; }
-        public int Indice { get; set; }
-        public FechaConindice(DateTime Fecha, int Indice)
-        {
-            this.Fecha = Fecha;
-            this.Indice = Indice;
-        }
-        public string toString()
-        {
-            return "Id" + Indice.ToString() + " - " + Fecha.ToShortDateString();
-        }
-    }
     public partial class Form1 : Form
     {
         List<FechaConindice> listaFeriados;
@@ -62,9 +48,9 @@ namespace Gestor_de_rotaciones
             listaFeriados.Add(feriados);
             feriados = new FechaConindice(new DateTime(DateTime.Now.Year, 7, 9), 8);
             listaFeriados.Add(feriados);
-            listaFeriados.Sort();
+            //listaFeriados.Sort();
 
-            AgregarFeriados(listaFeriados);
+            //AgregarFeriados(listaFeriados);
             if (lbListaFeriados.Items.Count > 0)
             {
                 lbListaFeriados.Enabled = true;
@@ -122,14 +108,14 @@ namespace Gestor_de_rotaciones
             if (VentanaNuevoFeriado.ShowDialog() == DialogResult.OK)
             {
                 lbListaFeriados.Items.Add(VentanaNuevoFeriado.dtpFechaFeriado.Value.ToShortDateString());
-                listaFeriados.Add(VentanaNuevoFeriado.dtpFechaFeriado.Value);
+                //listaFeriados.Add(VentanaNuevoFeriado.dtpFechaFeriado.Value);
             }
             VentanaNuevoFeriado.Dispose();
         }
 
         private void btnQuitarFeriado_Click(object sender, EventArgs e)
         {
-            lbListaFeriados.SelectedIndex
+            //lbListaFeriados.SelectedIndex
             listaFeriados.RemoveAt(lbListaFeriados.SelectedIndex);
             lbListaFeriados.Items.RemoveAt(lbListaFeriados.SelectedIndex);
             lbListaFeriados.SelectedItem = null;
@@ -164,10 +150,12 @@ namespace Gestor_de_rotaciones
                     i++;
                 } while (i < clbDíasSemana.Items.Count);
                 List<DateTime> listaFeriadosAChequear = new List<DateTime>();
+                /*
                 foreach (DateTime dt in listaFeriados)
                 {
                     listaFeriadosAChequear.Add(dt);
                 }
+                */
                 for (i = 0; i < listaFeriadosAChequear.Count; i++)
                 {
                     if (diasElegidos.IndexOf((int)listaFeriadosAChequear[i].DayOfWeek) == -1)
@@ -180,7 +168,7 @@ namespace Gestor_de_rotaciones
             }
             else
             {
-                AgregarFeriados(listaFeriados);
+                //AgregarFeriados(listaFeriados);
             }
         }
         private void AgregarFeriados(List<DateTime> listaFeriados)
@@ -190,6 +178,20 @@ namespace Gestor_de_rotaciones
             {
                 lbListaFeriados.Items.Add(dt);
             }
+        }
+    }
+    public class FechaConindice
+    {
+        public DateTime Fecha { get; set; }
+        public int Indice { get; set; }
+        public FechaConindice(DateTime Fecha, int Indice)
+        {
+            this.Fecha = Fecha;
+            this.Indice = Indice;
+        }
+        public string toString()
+        {
+            return Indice.ToString() + ";" + Fecha.DayOfWeek.ToString() + ";" + Fecha.ToShortDateString();
         }
     }
 }
