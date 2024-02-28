@@ -11,12 +11,29 @@ using static System.Windows.Forms.AxHost;
 
 namespace Gestor_de_rotaciones
 {
+    public class FechaConindice
+    {
+        public DateTime Fecha { get; set; }
+        public int Indice { get; set; }
+        public FechaConindice(DateTime Fecha, int Indice)
+        {
+            this.Fecha = Fecha;
+            this.Indice = Indice;
+        }
+        public string toString()
+        {
+            return "Id" + Indice.ToString() + " - " + Fecha.ToShortDateString();
+        }
+    }
     public partial class Form1 : Form
     {
-        List<DateTime> listaFeriados = new List<DateTime>();
+        List<FechaConindice> listaFeriados;
+        List<DateTime> listaDias;
         public Form1()
         {
             InitializeComponent();
+            listaFeriados = new List<FechaConindice>();
+            listaDias = new List<DateTime>();
             //dtpFechaDesde.Value = new DateTime(DateTime.Now.Year, 1, 1);
             //dtpFechaHasta.Value = new DateTime(DateTime.Now.Year, 12, 31);
 
@@ -29,45 +46,47 @@ namespace Gestor_de_rotaciones
             dtpVacacionesFin.Value = new DateTime(DateTime.Now.Year, 7, 19);
 
             //FERIADOS DEL AÑO
-            DateTime feriados = new DateTime(DateTime.Now.Year, 3, 28);
+            FechaConindice feriados = new FechaConindice(new DateTime(DateTime.Now.Year, 3, 28), 1);
             listaFeriados.Add(feriados);
-            feriados = new DateTime(DateTime.Now.Year, 3, 29);
+            feriados = new FechaConindice(new DateTime(DateTime.Now.Year, 3, 29), 1);
             listaFeriados.Add(feriados);
-            feriados = new DateTime(DateTime.Now.Year, 4, 1);
+            feriados = new FechaConindice(new DateTime(DateTime.Now.Year, 4, 1), 3);
             listaFeriados.Add(feriados);
-            feriados = new DateTime(DateTime.Now.Year, 4, 2);
+            feriados = new FechaConindice(new DateTime(DateTime.Now.Year, 4, 2), 4);
             listaFeriados.Add(feriados);
-            feriados = new DateTime(DateTime.Now.Year, 4, 2);
+            feriados = new FechaConindice(new DateTime(DateTime.Now.Year, 4, 2), 5);
             listaFeriados.Add(feriados);
-            feriados = new DateTime(DateTime.Now.Year, 5, 1);
+            feriados = new FechaConindice(new DateTime(DateTime.Now.Year, 5, 1), 6);
             listaFeriados.Add(feriados);
-            feriados = new DateTime(DateTime.Now.Year, 6, 20);
+            feriados = new FechaConindice(new DateTime(DateTime.Now.Year, 6, 20), 7);
             listaFeriados.Add(feriados);
-            feriados = new DateTime(DateTime.Now.Year, 7, 9);
+            feriados = new FechaConindice(new DateTime(DateTime.Now.Year, 7, 9), 8);
             listaFeriados.Add(feriados);
+            listaFeriados.Sort();
+
             AgregarFeriados(listaFeriados);
+            if (lbListaFeriados.Items.Count > 0)
+            {
+                lbListaFeriados.Enabled = true;
+            }
         }
         private void btnGenerarFechas_Click(object sender, EventArgs e)
         {
             bool state = false;
-            int i = 0;
-            int cantidadDias = 0;
             List<int> diasElegidos = new List<int>();
-            //DateTime fechaInicio;
-            //DateTime fechaFinal;
-            //int[] diasPorRotacion = null;
-            
+            rtbFechasFinales.Clear();
+            listaDias.Clear();
+
             //CALCULA QUE DÍAS A LA SEMANA SE SELECCIONÓ
-            do
+            for (int i = 0; i < clbDíasSemana.Items.Count; i++)
             {
                 if (clbDíasSemana.GetItemChecked(i))
                 {
                     state = true;
                     diasElegidos.Add(i + 1);
                 }
-                i++;
-            } while (i < clbDíasSemana.Items.Count);
-            
+            }
+
             //CHEQUEA QUE HAYA DÍAS SELECCIONADOS
             if (!state)
             {
@@ -75,105 +94,24 @@ namespace Gestor_de_rotaciones
             }
             else
             {
-                rtbFechasFinales.Clear();
-                List<DateTime> listaFeriadosAChequear = new List<DateTime>();
-                for (i = 0; i < listaFeriados.Count; i++)
-                {
-                    if (diasElegidos.IndexOf((int)listaFeriados[i].DayOfWeek) != -1)
-                    {
-                        listaFeriadosAChequear.Add(listaFeriados[i]);
-                    }
-                }
-                foreach (DateTime dt in listaFeriadosAChequear)
-                {
-                    rtbFechasFinales.Text = dt.ToString();
-                }
-                /*
-                foreach (DateTime dt in listaFeriados)
-                {
-                    listaFeriadosAChequear.Add(dt);
-                }
-                for (i = 0; i < listaFeriadosAChequear.Count; i++)
-                {
-                    if (diasElegidos.IndexOf((int)listaFeriadosAChequear[i].DayOfWeek) == -1)
-                    {
-                        listaFeriadosAChequear.RemoveAt(i);
-                        i--;
-                    }
-                }
-                */
-                cantidadDias -= listaFeriadosAChequear.Count;
-                rtbFechasFinales.Text = cantidadDias.ToString();
-                /*
                 for (DateTime fechaActual = dtpFechaDesde.Value; fechaActual <= dtpFechaHasta.Value; fechaActual = fechaActual.AddDays(1))
                 {
                     if (diasElegidos.IndexOf((int)fechaActual.DayOfWeek) != -1)
                     {
-                        i = 0;
-                        state = false;
-                        while (i < listaFeriados.Count && !state)
-                        {
-                            if (lbListaFeriados.Items.IndexOf(fechaActual.ToShortDateString()) == -1)
-                            {
-                                cantidadDias++;
-                            }
-                            i++;
-                        }
+                        listaDias.Add(fechaActual);
                     }
                 }
-                rtbFechasFinales.Text = cantidadDias.ToString();
-                */
-                /*
-                diasPorRotacion = new int[Convert.ToInt32(nupCantidadRotaciones.Value)];
-                for (i = 0; i < diasPorRotacion.Length; i++)
+                /*foreach (DateTime dt in listaFeriados)
                 {
-                    diasPorRotacion[i] = cantidadDias / (int)nupCantidadRotaciones.Value;
-                }
-                for (i = 0; i < cantidadDias - (diasPorRotacion[0] * diasPorRotacion.Length); i++)
-                {
-                    diasPorRotacion[i % diasPorRotacion.Length]++;
-                }
-                rtbFechasFinales.Clear();
-                fechaInicio = dtpFechaDesde.Value;
-                while (diasElegidos.IndexOf((int)fechaInicio.DayOfWeek) != -1)
-                {
-                    fechaInicio = fechaInicio.AddDays(1);
-                }
-                fechaFinal = fechaInicio.AddDays(1);
-                i = 0;
-                while (i < diasPorRotacion[0])
-                {
-                    if (diasElegidos.IndexOf((int)fechaFinal.DayOfWeek) != -1)
+                    if(listaDias.IndexOf(dt) != -1)
                     {
-                        i++;
+                        listaDias.RemoveAt(listaDias.IndexOf(dt));
                     }
-                    fechaFinal = fechaFinal.AddDays(1);
-                }
-                fechaFinal = fechaFinal.AddDays(-1)
-                rtbFechasFinales.Text = diasPorRotacion[0] + " - " + fechaInicio.ToShortDateString() + " - " + fechaFinal.ToShortDateString();
-                */
-                /*
-                for (int j = 1; j < diasPorRotacion.Length; j++)
+                }*/
+                foreach (DateTime dt in listaDias)
                 {
-                    fechaInicio = fechaFinal.AddDays(1);
-                    while (diasElegidos.IndexOf((int)fechaInicio.DayOfWeek) != -1)
-                    {
-                        fechaInicio = fechaInicio.AddDays(1);
-                    }
-                    fechaFinal = fechaInicio.AddDays(1);
-                    i = 0;
-                    while (i < diasPorRotacion[0])
-                    {
-                        if (diasElegidos.IndexOf((int)fechaFinal.DayOfWeek) != -1)
-                        {
-                            i++;
-                        }
-                        fechaFinal = fechaFinal.AddDays(1);
-                    }
-                    fechaFinal = fechaFinal.AddDays(-1);
-                    rtbFechasFinales.Text += "\n" + diasPorRotacion[j] + " - " + fechaInicio.ToShortDateString() + " - " + fechaFinal.ToShortDateString();
+                    rtbFechasFinales.Text += dt.ToString() + "\n";
                 }
-                */
             }
         }
 
@@ -191,6 +129,8 @@ namespace Gestor_de_rotaciones
 
         private void btnQuitarFeriado_Click(object sender, EventArgs e)
         {
+            lbListaFeriados.SelectedIndex
+            listaFeriados.RemoveAt(lbListaFeriados.SelectedIndex);
             lbListaFeriados.Items.RemoveAt(lbListaFeriados.SelectedIndex);
             lbListaFeriados.SelectedItem = null;
             if (lbListaFeriados.Items.Count == 0)
