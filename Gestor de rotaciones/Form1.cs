@@ -13,49 +13,61 @@ namespace Gestor_de_rotaciones
 {
     public partial class Form1 : Form
     {
-        List<FechaConindice> listaFeriados;
+        List<DateTime> listaFeriados;
         List<DateTime> listaDias;
         public Form1()
         {
             InitializeComponent();
-            listaFeriados = new List<FechaConindice>();
+            listaFeriados = new List<DateTime>();
             listaDias = new List<DateTime>();
-            //dtpFechaDesde.Value = new DateTime(DateTime.Now.Year, 1, 1);
-            //dtpFechaHasta.Value = new DateTime(DateTime.Now.Year, 12, 31);
 
             //INTERVALO DE CLASES
+            //dtpFechaDesde.Value = new DateTime(DateTime.Now.Year, 1, 1);
+            //dtpFechaHasta.Value = new DateTime(DateTime.Now.Year, 12, 31);
+            //dtpFechaDesde.Value = new DateTime(DateTime.Now.Year, 3, 4);
+            //dtpFechaHasta.Value = new DateTime(DateTime.Now.Year, 5, 6);
             dtpFechaDesde.Value = new DateTime(DateTime.Now.Year, 3, 4);
-            dtpFechaHasta.Value = new DateTime(DateTime.Now.Year, 5, 6);
+            dtpFechaHasta.Value = new DateTime(DateTime.Now.Year, 11, 18);
 
             //INTERVALO DE VACACIONES
             dtpVacacionesInicio.Value = new DateTime(DateTime.Now.Year, 7, 8);
             dtpVacacionesFin.Value = new DateTime(DateTime.Now.Year, 7, 19);
 
             //FERIADOS DEL AÑO
-            FechaConindice feriados = new FechaConindice(new DateTime(DateTime.Now.Year, 3, 28), 1);
+            DateTime feriados = new DateTime(DateTime.Now.Year, 3, 28);
             listaFeriados.Add(feriados);
-            feriados = new FechaConindice(new DateTime(DateTime.Now.Year, 3, 29), 1);
+            feriados = new DateTime(DateTime.Now.Year, 3, 29);
             listaFeriados.Add(feriados);
-            feriados = new FechaConindice(new DateTime(DateTime.Now.Year, 4, 1), 3);
+            feriados = new DateTime(DateTime.Now.Year, 4, 1);
             listaFeriados.Add(feriados);
-            feriados = new FechaConindice(new DateTime(DateTime.Now.Year, 4, 2), 4);
+            feriados = new DateTime(DateTime.Now.Year, 4, 2);
             listaFeriados.Add(feriados);
-            feriados = new FechaConindice(new DateTime(DateTime.Now.Year, 4, 2), 5);
+            feriados = new DateTime(DateTime.Now.Year, 5, 1);
             listaFeriados.Add(feriados);
-            feriados = new FechaConindice(new DateTime(DateTime.Now.Year, 5, 1), 6);
+            feriados = new DateTime(DateTime.Now.Year, 6, 17);
             listaFeriados.Add(feriados);
-            feriados = new FechaConindice(new DateTime(DateTime.Now.Year, 6, 20), 7);
+            feriados = new DateTime(DateTime.Now.Year, 6, 20);
             listaFeriados.Add(feriados);
-            feriados = new FechaConindice(new DateTime(DateTime.Now.Year, 7, 9), 8);
+            feriados = new DateTime(DateTime.Now.Year, 6, 21);
             listaFeriados.Add(feriados);
-            //listaFeriados.Sort();
+            feriados = new DateTime(DateTime.Now.Year, 7, 9);
+            listaFeriados.Add(feriados);
+            feriados = new DateTime(DateTime.Now.Year, 10, 12);
+            listaFeriados.Add(feriados);
+            listaFeriados.Sort();
 
-            //AgregarFeriados(listaFeriados);
-            if (lbListaFeriados.Items.Count > 0)
+            AgregarFeriados(listaFeriados);
+            VerificarBotonQuitar();
+        }
+        private void AgregarFeriados(List<DateTime> listaFeriados)
+        {
+            dgvFeriados.Rows.Clear();
+            for (int i = 0; i < listaFeriados.Count; i++)
             {
-                lbListaFeriados.Enabled = true;
+                dgvFeriados.Rows.Add(i, listaFeriados[i].ToShortDateString());
             }
         }
+
         private void btnGenerarFechas_Click(object sender, EventArgs e)
         {
             bool state = false;
@@ -87,111 +99,71 @@ namespace Gestor_de_rotaciones
                         listaDias.Add(fechaActual);
                     }
                 }
-                /*foreach (DateTime dt in listaFeriados)
+                foreach (DateTime dt in listaFeriados)
                 {
-                    if(listaDias.IndexOf(dt) != -1)
+                    if (listaDias.IndexOf(dt) != -1)
                     {
                         listaDias.RemoveAt(listaDias.IndexOf(dt));
                     }
-                }*/
+                }
+                for (DateTime dt = dtpVacacionesInicio.Value; dt <= dtpVacacionesFin.Value; dt = dt.AddDays(1))
+                {
+                    if (listaDias.IndexOf(dt) != -1)
+                    {
+                        listaDias.RemoveAt(listaDias.IndexOf(dt));
+                    }
+                }
+                rtbFechasFinales.Text += "Días: " + listaDias.Count + "\n";
+                int i = 0;
                 foreach (DateTime dt in listaDias)
                 {
-                    rtbFechasFinales.Text += dt.ToString() + "\n";
+                    i++;
+                    rtbFechasFinales.Text += dt.ToShortDateString() + "\n";
                 }
+                rtbFechasFinales.Text += "Días: " + i + "\n";
             }
         }
 
         private void btnAgregarFeriado_Click(object sender, EventArgs e)
         {
-            lbListaFeriados.Enabled = true;
-            Form2 VentanaNuevoFeriado = new Form2();
-            if (VentanaNuevoFeriado.ShowDialog() == DialogResult.OK)
+            Form2 unaVentana = new Form2();
+            if (unaVentana.ShowDialog() == DialogResult.OK)
             {
-                lbListaFeriados.Items.Add(VentanaNuevoFeriado.dtpFechaFeriado.Value.ToShortDateString());
-                //listaFeriados.Add(VentanaNuevoFeriado.dtpFechaFeriado.Value);
+                listaFeriados.Add(unaVentana.dtpFechaFeriado.Value);
+                listaFeriados.Sort();
+                AgregarFeriados(listaFeriados);
+                btnQuitarFeriado.Enabled = true;
             }
-            VentanaNuevoFeriado.Dispose();
+            unaVentana.Dispose();
         }
 
         private void btnQuitarFeriado_Click(object sender, EventArgs e)
         {
-            //lbListaFeriados.SelectedIndex
-            listaFeriados.RemoveAt(lbListaFeriados.SelectedIndex);
-            lbListaFeriados.Items.RemoveAt(lbListaFeriados.SelectedIndex);
-            lbListaFeriados.SelectedItem = null;
-            if (lbListaFeriados.Items.Count == 0)
-            {
-                lbListaFeriados.Enabled = false;
-                btnQuitarFeriado.Enabled = false;
-            }
-        }
-
-        private void lbListaFeriados_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (lbListaFeriados.SelectedIndex != -1)
-            {
-                btnQuitarFeriado.Enabled = true;
-            }
+            VerificarBotonQuitar();
         }
 
         private void cbOcultarFeriados_CheckedChanged(object sender, EventArgs e)
         {
-            if (!cbOcultarFeriados.Checked)
+            if (cbOcultarFeriados.Checked)
             {
-                List<int> diasElegidos = new List<int>();
-                int i = 0;
-                //CALCULA QUE DÍAS A LA SEMANA SE SELECCIONÓ
-                do
-                {
-                    if (clbDíasSemana.GetItemChecked(i))
-                    {
-                        diasElegidos.Add(i + 1);
-                    }
-                    i++;
-                } while (i < clbDíasSemana.Items.Count);
-                List<DateTime> listaFeriadosAChequear = new List<DateTime>();
-                /*
-                foreach (DateTime dt in listaFeriados)
-                {
-                    listaFeriadosAChequear.Add(dt);
-                }
-                */
-                for (i = 0; i < listaFeriadosAChequear.Count; i++)
-                {
-                    if (diasElegidos.IndexOf((int)listaFeriadosAChequear[i].DayOfWeek) == -1)
-                    {
-                        listaFeriadosAChequear.RemoveAt(i);
-                        i--;
-                    }
-                }
-                AgregarFeriados(listaFeriadosAChequear);
+                AgregarFeriados(listaFeriados);
             }
             else
             {
-                //AgregarFeriados(listaFeriados);
+
             }
         }
-        private void AgregarFeriados(List<DateTime> listaFeriados)
+
+        private void VerificarBotonQuitar()
         {
-            lbListaFeriados.Items.Clear();
-            foreach (DateTime dt in listaFeriados)
+            if (dgvFeriados.Rows.Count == 0)
             {
-                lbListaFeriados.Items.Add(dt);
+                btnQuitarFeriado.Enabled = false;
             }
-        }
-    }
-    public class FechaConindice
-    {
-        public DateTime Fecha { get; set; }
-        public int Indice { get; set; }
-        public FechaConindice(DateTime Fecha, int Indice)
-        {
-            this.Fecha = Fecha;
-            this.Indice = Indice;
-        }
-        public string toString()
-        {
-            return Indice.ToString() + ";" + Fecha.DayOfWeek.ToString() + ";" + Fecha.ToShortDateString();
+            else
+            {
+                btnQuitarFeriado.Enabled = true;
+            }
         }
     }
 }
