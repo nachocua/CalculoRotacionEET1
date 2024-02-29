@@ -153,18 +153,6 @@ namespace Gestor_de_rotaciones
             VerificarBotonQuitar();
         }
 
-        private void cbOcultarFeriados_CheckedChanged(object sender, EventArgs e)
-        {
-            if (cbOcultarFeriados.Checked)
-            {
-                AgregarFeriados(listaFeriados);
-            }
-            else
-            {
-
-            }
-        }
-
         private void VerificarBotonQuitar()
         {
             if (dgvFeriados.Rows.Count == 0)
