@@ -1,0 +1,4 @@
+#Carpetas Ignoradas
+.vs
+bin
+obj
