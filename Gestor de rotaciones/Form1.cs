@@ -72,11 +72,13 @@ namespace Gestor_de_rotaciones
         {
             bool state = false;
             List<int> diasElegidos = new List<int>();
+            int[] diasPorRotacion = new int[(int)nupCantidadRotaciones.Value];
+            int i;
             rtbFechasFinales.Clear();
             listaDias.Clear();
 
             //CALCULA QUE DÍAS A LA SEMANA SE SELECCIONÓ
-            for (int i = 0; i < clbDíasSemana.Items.Count; i++)
+            for (i = 0; i < clbDíasSemana.Items.Count; i++)
             {
                 if (clbDíasSemana.GetItemChecked(i))
                 {
@@ -113,14 +115,22 @@ namespace Gestor_de_rotaciones
                         listaDias.RemoveAt(listaDias.IndexOf(dt));
                     }
                 }
-                rtbFechasFinales.Text += "Días: " + listaDias.Count + "\n";
-                int i = 0;
-                foreach (DateTime dt in listaDias)
+                for (i = 0; i < diasPorRotacion.Count(); i++)
                 {
-                    i++;
-                    rtbFechasFinales.Text += dt.ToShortDateString() + "\n";
+                    diasPorRotacion[i] = listaDias.Count / diasPorRotacion.Count();
                 }
-                rtbFechasFinales.Text += "Días: " + i + "\n";
+                for (i = 0; i < listaDias.Count % diasPorRotacion.Count(); i++)
+                {
+                    diasPorRotacion[i]++;
+                }
+                int diasAcumulados = 0;
+                for (i = 1; i <= diasPorRotacion.Count(); i++)
+                {
+                    rtbFechasFinales.Text += "Rotación " + i + ": "
+                        + listaDias[diasAcumulados].ToShortDateString() + " - "
+                        + listaDias[diasAcumulados + diasPorRotacion[i - 1] - 1].ToShortDateString() + "\n";
+                    diasAcumulados += diasPorRotacion[i - 1];
+                }
             }
         }
 
