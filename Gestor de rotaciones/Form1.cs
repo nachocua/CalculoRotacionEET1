@@ -127,6 +127,7 @@ namespace Gestor_de_rotaciones
                 for (i = 1; i <= diasPorRotacion.Count(); i++)
                 {
                     rtbFechasFinales.Text += "Rotación " + i + ": "
+                        + diasPorRotacion[i-1] + " días de clase. "
                         + listaDias[diasAcumulados].ToShortDateString() + " - "
                         + listaDias[diasAcumulados + diasPorRotacion[i - 1] - 1].ToShortDateString() + "\n";
                     diasAcumulados += diasPorRotacion[i - 1];
